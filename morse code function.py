@@ -18,3 +18,12 @@ def english_to_morse(text):
             raise MorseCodeError(f"Error: Character '{char}' is not in the Morse code dictionary.")
         # Convert character to Morse code and append to the list
         morse_text.append(encrypt.get(char.upper(), ''))  
+
+    return ' '.join(morse_text)  # Join the Morse code characters to form the final Morse code string
+def morse_to_english(text):
+    # Dictionary mapping Morse code to English characters
+    encrypt = {
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+        'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+        'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', ' ': '/'
+    }
