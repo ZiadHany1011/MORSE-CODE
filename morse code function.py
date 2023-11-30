@@ -27,3 +27,16 @@ def morse_to_english(text):
         'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
         'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', ' ': '/'
     }
+    decrypt = {value: key for key, value in encrypt.items()}  # Create a dictionary for decoding Morse code
+
+    translated_words = []  # Placeholder for storing translated words
+    for word in text.split('/'):  # Split input text by '/'
+        for char in word.split():  # Split words by space to get individual Morse code characters
+            if char not in decrypt:
+                # Raise an error if the Morse code character is not in the Morse code dictionary
+                raise MorseCodeError(f"Error: Character '{char}' is not in the Morse code dictionary.")
+            # Append decoded character to the translated words
+            translated_words.append(decrypt[char])
+
+        translated_words.append(' ')  # Add a space after each word
+    return ''.join(translated_words).rstrip()  # Join the translated words and remove trailing whitespac
