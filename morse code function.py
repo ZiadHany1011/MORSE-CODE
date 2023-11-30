@@ -40,3 +40,49 @@ def morse_to_english(text):
 
         translated_words.append(' ')  # Add a space after each word
     return ''.join(translated_words).rstrip()  # Join the translated words and remove trailing whitespac
+# Loop for the translation menu
+while True:
+    print("\nChoose an option:")  # Print the options for the translation menu
+    print("1. Translate from English to Morse")
+    print("2. Translate from Morse to English")
+    print("0. Exit")
+
+    choice = input("Enter your choice: ")  # Prompt the user to input their choice
+
+    try:
+        if choice == '1':  # Check if the user chose to translate from English to Morse
+            while True:
+                text = input('Enter the text to translate to Morse code: ')  # Input text to translate to Morse code
+                if text.strip():
+                    # Check if the input text contains only valid English characters and spaces
+                    if all(char.upper() in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ' for char in text):
+                        translated_text = english_to_morse(text)  # Translate input text to Morse code
+                        print("Translated Text (English to Morse):", translated_text)
+                        break
+                    else:
+                        raise MorseCodeError("Error: Input contains characters not in the Morse code dictionary.")
+                else:
+                    raise MorseCodeError("Error: Please enter some text.")
+        elif choice == '2':  # Check if the user chose to translate from Morse to English
+            while True:
+                text = input('Enter the Morse code to translate to English (use space between each letter and "/" between each word): ')
+                if text.strip():
+                    # Check if the input Morse code contains valid Morse code characters
+                    if all(code in ['.', '-', '/', ' '] for code in text):
+                        translated_text = morse_to_english(text)  # Translate input Morse code to English
+                        print("Translated Text (Morse to English):", translated_text)
+                        break
+                    else:
+                        raise MorseCodeError("Error: Input contains characters not in the Morse code dictionary.")
+                else:
+                    raise MorseCodeError("Error: Please enter some text.")
+        elif choice == '0':  # Check if the user chose to exit the program
+            print("Exiting the translator...")  # Print an exit message
+            break
+        else:
+            raise MorseCodeError("Error: Invalid choice. Please choose a valid option (0, 1, or 2).")  # Raise an error for an invalid choice
+    
+    except MorseCodeError as e:
+        print(e)  # Print the specific error message for Morse code errors
+    except Exception as e:
+        print("An unexpected error occurred:", str(e))  # Print a generic error message for unexpected errors
